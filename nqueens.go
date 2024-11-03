@@ -1,6 +1,6 @@
 package nqueens
 
-func nqueens(size int) [][]int {
+func Nqueens(size int) [][]int {
 	return [][]int{
 		{},
 	}
