@@ -11,12 +11,34 @@ func Nqueens(size int) [][]int {
 		board := frontier[0]
 		frontier = frontier[1:]
 
-		//  If the board is not valid, continue
+		if invalidState(board) {
+			continue
+		}
 		if len(board) == size {
 			results = append(results, board)
+		} else {
+			for j := 0; j < size; j++ {
+				newBoard := make([]int, len(board))
+				copy(newBoard, board)
+				newBoard = append(newBoard, j)
+				frontier = append(frontier, newBoard)
+			}
 		}
-		//  If the board is incomplete, add next possible states to frontier
 	}
 
 	return results
+}
+
+func invalidState(board []int) bool {
+	existing_row := make(map[int]int)
+	for _, row := range board {
+		_, ok := existing_row[row]
+		if ok {
+			return true
+		} else {
+			existing_row[row] = row
+		}
+
+	}
+	return false
 }
