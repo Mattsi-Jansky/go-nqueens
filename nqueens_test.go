@@ -1,4 +1,4 @@
-package main
+package nqueens
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -12,10 +12,4 @@ func TestSizeFour(t *testing.T) {
 		{1, 3, 0, 2},
 		{2, 0, 3, 1},
 	}, actual)
-}
-
-func nqueens(size int) [][]int {
-	return [][]int{
-		{},
-	}
 }
