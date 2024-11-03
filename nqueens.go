@@ -11,7 +11,7 @@ func Nqueens(size int) [][]int {
 		board := frontier[0]
 		frontier = frontier[1:]
 
-		if invalidState(board) {
+		if InvalidState(board) {
 			continue
 		}
 		if len(board) == size {
@@ -29,7 +29,7 @@ func Nqueens(size int) [][]int {
 	return results
 }
 
-func invalidState(board []int) bool {
+func InvalidState(board []int) bool {
 	existing_row := make(map[int]int)
 	for _, row := range board {
 		_, ok := existing_row[row]
@@ -39,6 +39,27 @@ func invalidState(board []int) bool {
 			existing_row[row] = row
 		}
 
+	}
+
+	last_column_added := board[len(board)-1]
+	current := []int{(len(board) - 1), last_column_added}
+	for columToCheck := 0; columToCheck < len(board)-1; columToCheck++ {
+		toCompare := []int{columToCheck, board[columToCheck]}
+
+		diffColumn := current[0] - toCompare[0]
+		diffRow := current[1] - toCompare[1]
+
+		if diffColumn < 0 {
+			diffColumn = -diffColumn
+		}
+
+		if diffRow < 0 {
+			diffRow = -diffRow
+		}
+
+		if diffColumn == diffRow {
+			return true
+		}
 	}
 	return false
 }
